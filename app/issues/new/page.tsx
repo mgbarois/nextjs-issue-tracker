@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
-import { TextField, Button, Callout, Text } from "@radix-ui/themes";
+import { TextField, Button, Callout, Text, Spinner } from "@radix-ui/themes";
 import "easymde/dist/easymde.min.css";
 import { SubmitHandler, useForm, Controller } from "react-hook-form";
 import { useRouter } from "next/navigation";
@@ -31,12 +31,15 @@ const NewIssuePage = () => {
   });
   const router = useRouter();
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const onSubmit: SubmitHandler<IssueForm> = async (data) => {
     try {
+      setIsSubmitting(true);
       await axios.post("/api/issues", data);
       router.push("../issues");
     } catch {
+      setIsSubmitting(false);
       setError("An unexpected error occurred.");
     }
   };
@@ -63,7 +66,9 @@ const NewIssuePage = () => {
           )}
         />
         <FormFieldError>{errors.description?.message}</FormFieldError>
-        <Button type="submit">Submit New Issue</Button>
+        <Button type="submit" disabled={isSubmitting}>
+          Submit New Issue {isSubmitting && <Spinner />}
+        </Button>
       </form>
     </div>
   );
