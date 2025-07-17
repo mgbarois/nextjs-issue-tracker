@@ -1,12 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
-import { TextField, Button, Callout } from "@radix-ui/themes";
+import { TextField, Button, Callout, Text } from "@radix-ui/themes";
 import "easymde/dist/easymde.min.css";
 import { SubmitHandler, useForm, Controller } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { MdError } from "react-icons/md";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createIssueSchema } from "@/app/validationSchemas";
 
 // Import SimpleMDE dynamically - Skip import at module evaluation during SSR,
 // to avoid referencing document before render
@@ -14,17 +17,21 @@ const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
 });
 
-interface IInputForm {
-  title: string;
-  description: string;
-}
+type IssueForm = z.infer<typeof createIssueSchema>;
 
 const NewIssuePage = () => {
-  const { register, control, handleSubmit } = useForm<IInputForm>();
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IssueForm>({
+    resolver: zodResolver(createIssueSchema),
+  });
   const router = useRouter();
   const [error, setError] = useState("");
 
-  const onSubmit: SubmitHandler<IInputForm> = async (data) => {
+  const onSubmit: SubmitHandler<IssueForm> = async (data) => {
     try {
       await axios.post("/api/issues", data);
       router.push("../issues");
@@ -45,13 +52,18 @@ const NewIssuePage = () => {
       )}
       <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
         <TextField.Root placeholder="Title" {...register("title")} />
+        {errors.title && <p className="text-red-600">{errors.title.message}</p>}
         <Controller
           name="description"
           control={control}
+          defaultValue=""
           render={({ field }) => (
             <SimpleMDE placeholder={"Description"} {...field} />
           )}
         />
+        {errors.description && (
+          <p className="text-red-600">{errors.description.message}</p>
+        )}
         <Button type="submit">Submit New Issue</Button>
       </form>
     </div>
