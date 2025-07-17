@@ -5,9 +5,9 @@ import { Button } from "@radix-ui/themes";
 const IssuesPage = () => {
   return (
     <div>
-      <Button>
-        <Link href="/issues/new">Create new issue</Link>
-      </Button>
+      <Link href="/issues/new">
+        <Button>Create new issue</Button>
+      </Link>
     </div>
   );
 };
