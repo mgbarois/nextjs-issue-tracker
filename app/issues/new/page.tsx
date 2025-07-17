@@ -10,6 +10,7 @@ import { MdError } from "react-icons/md";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createIssueSchema } from "@/app/validationSchemas";
+import FormFieldError from "@/app/components/FormFieldError";
 
 // Import SimpleMDE dynamically - Skip import at module evaluation during SSR,
 // to avoid referencing document before render
@@ -52,7 +53,7 @@ const NewIssuePage = () => {
       )}
       <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
         <TextField.Root placeholder="Title" {...register("title")} />
-        {errors.title && <p className="text-red-600">{errors.title.message}</p>}
+        <FormFieldError>{errors.title?.message}</FormFieldError>
         <Controller
           name="description"
           control={control}
@@ -61,9 +62,7 @@ const NewIssuePage = () => {
             <SimpleMDE placeholder={"Description"} {...field} />
           )}
         />
-        {errors.description && (
-          <p className="text-red-600">{errors.description.message}</p>
-        )}
+        <FormFieldError>{errors.description?.message}</FormFieldError>
         <Button type="submit">Submit New Issue</Button>
       </form>
     </div>
