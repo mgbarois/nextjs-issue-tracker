@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import dynamic from "next/dynamic";
-import { TextField, Button, Callout, Text, Spinner } from "@radix-ui/themes";
+import { TextField, Button, Callout, Spinner } from "@radix-ui/themes";
 import "easymde/dist/easymde.min.css";
-import { SubmitHandler, useForm, Controller } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { MdError } from "react-icons/md";
@@ -33,7 +33,7 @@ const NewIssuePage = () => {
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSubmit: SubmitHandler<IssueForm> = async (data) => {
+  const onSubmit = handleSubmit(async (data) => {
     try {
       setIsSubmitting(true);
       await axios.post("/api/issues", data);
@@ -42,7 +42,7 @@ const NewIssuePage = () => {
       setIsSubmitting(false);
       setError("An unexpected error occurred.");
     }
-  };
+  });
 
   return (
     <div className="max-w-xl">
@@ -54,7 +54,7 @@ const NewIssuePage = () => {
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
-      <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
+      <form className="space-y-3" onSubmit={onSubmit}>
         <TextField.Root placeholder="Title" {...register("title")} />
         <FormFieldError>{errors.title?.message}</FormFieldError>
         <Controller
