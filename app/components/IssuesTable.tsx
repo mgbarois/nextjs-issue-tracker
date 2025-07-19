@@ -5,6 +5,7 @@ import { Issue } from "../generated/prisma";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { IssueSkeleton } from "../issues/loading";
+import Link from "next/link";
 
 interface Props {
   issues: Issue[] | IssueSkeleton[];
@@ -29,7 +30,13 @@ const IssuesTable = ({ issues }: Props) => {
           return (
             <Table.Row key={issue.id}>
               <Table.Cell>
-                {issue.title || <Skeleton />}
+                {issue.title ? (
+                  <Link href={`/issues/${issue.id.toString()}`}>
+                    {issue.title}
+                  </Link>
+                ) : (
+                  <Skeleton />
+                )}
                 <div className="block md:hidden mt-3">
                   {issue.status ? (
                     <IssueStatusBadge status={issue.status} />
