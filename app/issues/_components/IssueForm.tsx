@@ -1,9 +1,16 @@
 "use client";
-import { ErrorMessage } from "@/app/components";
+import { ErrorMessage, IssueStatusBadge } from "@/app/components";
 import { Issue } from "@/app/generated/prisma";
-import { issueSchema } from "@/app/validationSchemas";
+import { issueSchema, statusEnum } from "@/app/validationSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Box, Button, Callout, Spinner, TextField } from "@radix-ui/themes";
+import {
+  Box,
+  Button,
+  Callout,
+  Select,
+  Spinner,
+  TextField,
+} from "@radix-ui/themes";
 import axios from "axios";
 import "easymde/dist/easymde.min.css";
 import dynamic from "next/dynamic";
@@ -67,6 +74,26 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
           {...register("title")}
         />
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
+        <div className="mb-3">
+          <Controller
+            name="status"
+            control={control}
+            defaultValue={issue?.status || "OPEN"}
+            render={({ field }) => (
+              <Select.Root onValueChange={field.onChange} {...field}>
+                <Select.Trigger />
+                <Select.Content variant="soft" color="gray">
+                  {statusEnum.map((status) => (
+                    <Select.Item key={status} value={status}>
+                      <IssueStatusBadge status={status} />
+                    </Select.Item>
+                  ))}
+                </Select.Content>
+              </Select.Root>
+            )}
+          />
+        </div>
+        <ErrorMessage>{errors.status?.message}</ErrorMessage>
         <Controller
           name="description"
           control={control}

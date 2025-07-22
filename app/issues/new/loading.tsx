@@ -5,6 +5,7 @@ const NewIssueLoadingPage = () => {
   return (
     <Box className="max-w-xl">
       <Skeleton />
+      <Skeleton size="xs" />
       <Skeleton height="20rem" />
     </Box>
   );

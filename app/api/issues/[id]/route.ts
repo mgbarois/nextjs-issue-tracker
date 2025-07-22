@@ -15,9 +15,9 @@ export const PATCH = async (req: NextRequest, { params }: requestProps) => {
       status: 400,
     });
   }
-  const issueId = await parseInt(params.id);
+  const { id } = await params;
   const issue = await prisma.issue.findUnique({
-    where: { id: issueId },
+    where: { id: parseInt(id) },
   });
 
   if (!issue)
@@ -28,11 +28,11 @@ export const PATCH = async (req: NextRequest, { params }: requestProps) => {
       }
     );
 
-  const { title, description } = body;
+  const { title, status, description } = body;
 
   const updatedIssue = await prisma.issue.update({
     where: { id: issue.id },
-    data: { title, description },
+    data: { title, status, description },
   });
   return NextResponse.json(updatedIssue);
 };
