@@ -1,7 +1,7 @@
-import IssueDetail from "./IssueDetail";
+import IssueDetailLayout from "./IssueDetailLayout";
 
-const IssuesDetailLoadingPage = () => {
-  return <IssueDetail />;
+const IssueDetailLoadingPage = () => {
+  return <IssueDetailLayout />;
 };
 
-export default IssuesDetailLoadingPage;
+export default IssueDetailLoadingPage;

@@ -1,7 +1,7 @@
 import prisma from "@/prisma/client";
 import { notFound } from "next/navigation";
 import React from "react";
-import IssueDetail from "./IssueDetail";
+import IssueDetailLayout from "./IssueDetailLayout";
 import delay from "delay";
 
 interface Props {
@@ -20,7 +20,7 @@ const IssueDetailPage = async ({ params }: Props) => {
     notFound();
   }
 
-  return <IssueDetail issue={issue} />;
+  return <IssueDetailLayout issue={issue} />;
 };
 
 export default IssueDetailPage;
