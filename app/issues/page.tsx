@@ -1,6 +1,6 @@
 import React from "react";
 import prisma from "@/prisma/client";
-import IssuesTable from "../components/IssuesTable";
+import IssuesTable from "./IssuesTable";
 import IssueActions from "./IssueActions";
 import delay from "delay";
 

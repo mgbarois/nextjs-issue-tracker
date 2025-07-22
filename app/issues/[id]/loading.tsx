@@ -1,7 +1,8 @@
 import React from "react";
+import IssueDetail from "./IssueDetail";
 
 const IssuesDetailLoadingPage = () => {
-  return <div>Loading...</div>;
+  return <IssueDetail />;
 };
 
 export default IssuesDetailLoadingPage;

@@ -1,13 +1,11 @@
 import { Table } from "@radix-ui/themes";
-import React from "react";
-import IssueStatusBadge from "./IssueStatusBadge";
-import { Issue } from "../generated/prisma";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { IssueSkeleton } from "../issues/loading";
-import Link from "./Link";
+import IssueStatusBadge from "../components/IssueStatusBadge";
+import Link from "../components/Link";
+import { Issue } from "../generated/prisma";
 interface Props {
-  issues: Issue[] | IssueSkeleton[];
+  issues: Issue[] | undefined[];
 }
 
 const IssuesTable = ({ issues }: Props) => {
@@ -25,11 +23,11 @@ const IssuesTable = ({ issues }: Props) => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {issues.map((issue) => {
+        {issues.map((issue, index) => {
           return (
-            <Table.Row key={issue.id}>
+            <Table.Row key={index}>
               <Table.Cell>
-                {issue.title ? (
+                {issue ? (
                   <Link href={`/issues/${issue.id.toString()}`}>
                     {issue.title}
                   </Link>
@@ -37,25 +35,33 @@ const IssuesTable = ({ issues }: Props) => {
                   <Skeleton />
                 )}
                 <div className="block md:hidden mt-3">
-                  {issue.status ? (
+                  {issue ? (
                     <IssueStatusBadge status={issue.status} />
                   ) : (
-                    <Skeleton />
+                    <Skeleton width="3rem" />
                   )}
                 </div>
                 <div className="block md:hidden float-right">
-                  {issue.createdAt?.toDateString() || <Skeleton />}
+                  {issue ? (
+                    issue.createdAt?.toDateString()
+                  ) : (
+                    <Skeleton width="7rem" />
+                  )}
                 </div>
               </Table.Cell>
               <Table.Cell className="hidden md:table-cell">
-                {issue.status ? (
+                {issue ? (
                   <IssueStatusBadge status={issue.status} />
                 ) : (
-                  <Skeleton />
+                  <Skeleton width="3rem" />
                 )}
               </Table.Cell>
               <Table.Cell className="hidden md:table-cell">
-                {issue.createdAt?.toDateString() || <Skeleton />}
+                {issue ? (
+                  issue.createdAt?.toDateString()
+                ) : (
+                  <Skeleton width="7rem" />
+                )}
               </Table.Cell>
             </Table.Row>
           );
