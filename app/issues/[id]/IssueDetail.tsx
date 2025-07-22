@@ -17,12 +17,10 @@ const IssueDetail = ({ issue }: Props) => {
           {issue ? (
             <IssueStatusBadge status={issue.status} />
           ) : (
-            <Skeleton width="3rem" />
+            <Skeleton size="xs" />
           )}
         </p>
-        <p>
-          {issue ? issue.createdAt.toDateString() : <Skeleton width="7rem" />}
-        </p>
+        <p>{issue ? issue.createdAt.toDateString() : <Skeleton size="s" />}</p>
       </Flex>
       <Card className="prose" mt="5">
         {issue ? (

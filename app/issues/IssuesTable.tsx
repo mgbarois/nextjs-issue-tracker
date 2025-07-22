@@ -35,14 +35,14 @@ const IssuesTable = ({ issues }: Props) => {
                   {issue ? (
                     <IssueStatusBadge status={issue.status} />
                   ) : (
-                    <Skeleton width="3rem" />
+                    <Skeleton size="xs" />
                   )}
                 </div>
                 <div className="block md:hidden float-right">
                   {issue ? (
                     issue.createdAt?.toDateString()
                   ) : (
-                    <Skeleton width="7rem" />
+                    <Skeleton size="s" />
                   )}
                 </div>
               </Table.Cell>
@@ -50,14 +50,14 @@ const IssuesTable = ({ issues }: Props) => {
                 {issue ? (
                   <IssueStatusBadge status={issue.status} />
                 ) : (
-                  <Skeleton width="3rem" />
+                  <Skeleton size="xs" />
                 )}
               </Table.Cell>
               <Table.Cell className="hidden md:table-cell">
                 {issue ? (
                   issue.createdAt?.toDateString()
                 ) : (
-                  <Skeleton width="7rem" />
+                  <Skeleton size="s" />
                 )}
               </Table.Cell>
             </Table.Row>
