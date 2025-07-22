@@ -1,8 +1,8 @@
 "use client";
-import FormFieldError from "@/app/components/FormFieldError";
+import { ErrorMessage } from "@/app/components";
 import { createIssueSchema } from "@/app/validationSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button, Callout, Spinner, TextField } from "@radix-ui/themes";
+import { Box, Button, Callout, Spinner, TextField } from "@radix-ui/themes";
 import axios from "axios";
 import "easymde/dist/easymde.min.css";
 import dynamic from "next/dynamic";
@@ -45,7 +45,7 @@ const NewIssuePage = () => {
   });
 
   return (
-    <div className="max-w-xl">
+    <Box className="max-w-xl">
       {error && (
         <Callout.Root className="mb-5" color="red">
           <Callout.Icon>
@@ -56,7 +56,7 @@ const NewIssuePage = () => {
       )}
       <form className="space-y-3" onSubmit={onSubmit}>
         <TextField.Root placeholder="Title" {...register("title")} />
-        <FormFieldError>{errors.title?.message}</FormFieldError>
+        <ErrorMessage>{errors.title?.message}</ErrorMessage>
         <Controller
           name="description"
           control={control}
@@ -65,12 +65,12 @@ const NewIssuePage = () => {
             <SimpleMDE placeholder={"Description"} {...field} />
           )}
         />
-        <FormFieldError>{errors.description?.message}</FormFieldError>
+        <ErrorMessage>{errors.description?.message}</ErrorMessage>
         <Button type="submit" disabled={isSubmitting}>
           Submit New Issue {isSubmitting && <Spinner />}
         </Button>
       </form>
-    </div>
+    </Box>
   );
 };
 

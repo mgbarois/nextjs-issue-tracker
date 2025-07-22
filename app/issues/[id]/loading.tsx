@@ -1,4 +1,3 @@
-import React from "react";
 import IssueDetail from "./IssueDetail";
 
 const IssuesDetailLoadingPage = () => {

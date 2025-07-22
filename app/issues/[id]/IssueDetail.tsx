@@ -1,9 +1,7 @@
+import { Skeleton } from "@/app/components";
 import IssueStatusBadge from "@/app/components/IssueStatusBadge";
 import { Issue } from "@/app/generated/prisma";
 import { Box, Card, Flex, Heading } from "@radix-ui/themes";
-import React from "react";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
 import ReactMarkdown from "react-markdown";
 
 interface Props {

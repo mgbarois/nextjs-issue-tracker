@@ -1,8 +1,5 @@
+import { IssueStatusBadge, Link, Skeleton } from "@/app/components";
 import { Table } from "@radix-ui/themes";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
-import IssueStatusBadge from "../components/IssueStatusBadge";
-import Link from "../components/Link";
 import { Issue } from "../generated/prisma";
 interface Props {
   issues: Issue[] | undefined[];
