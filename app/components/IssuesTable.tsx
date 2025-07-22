@@ -5,8 +5,7 @@ import { Issue } from "../generated/prisma";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { IssueSkeleton } from "../issues/loading";
-import Link from "next/link";
-
+import Link from "./Link";
 interface Props {
   issues: Issue[] | IssueSkeleton[];
 }
