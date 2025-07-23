@@ -1,7 +1,7 @@
+import { PageProps } from "@/.next/types/app/page";
 import prisma from "@/prisma/client";
 import { notFound } from "next/navigation";
-import IssueForm from "../../_components/IssueForm";
-import { PageProps } from "@/.next/types/app/page";
+import EditIssueLayout from "./EditIssueLayout";
 
 const EditIssuePage = async ({ params }: PageProps) => {
   const { id } = await params;
@@ -10,7 +10,7 @@ const EditIssuePage = async ({ params }: PageProps) => {
   });
 
   if (!issue) notFound();
-  return <IssueForm issue={issue} />;
+  return <EditIssueLayout issue={issue} />;
 };
 
 export default EditIssuePage;
