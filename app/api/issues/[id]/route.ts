@@ -1,10 +1,12 @@
-import { PageProps } from "@/.next/types/app/page";
 import { issueSchema } from "@/app/validationSchemas";
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
-export const PATCH = async (req: NextRequest, { params }: PageProps) => {
+export const PATCH = async (
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) => {
   const body = await req.json();
   const validation = issueSchema.safeParse(body);
   if (!validation.success) {

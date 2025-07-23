@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { Status } from "./generated/prisma";
+import { Status } from "@/generated/prisma";
 
 export const statusEnum: Status[] = ["OPEN", "IN_PROGRESS", "CLOSED"];
 

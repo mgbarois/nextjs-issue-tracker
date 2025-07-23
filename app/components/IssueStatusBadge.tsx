@@ -1,5 +1,5 @@
 import React from "react";
-import { Status } from "../generated/prisma";
+import { Status } from "@/generated/prisma";
 import { Badge } from "@radix-ui/themes";
 
 interface Props {

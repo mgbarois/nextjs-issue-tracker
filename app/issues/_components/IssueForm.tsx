@@ -1,6 +1,6 @@
 "use client";
 import { ErrorMessage, IssueStatusBadge } from "@/app/components";
-import { Issue } from "@/app/generated/prisma";
+import { Issue } from "@/generated/prisma";
 import { issueSchema, statusEnum } from "@/app/validationSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {

@@ -1,5 +1,5 @@
 import { Skeleton } from "@/app/components";
-import { Issue } from "@/app/generated/prisma";
+import { Issue } from "@/generated/prisma";
 import { Box, Grid } from "@radix-ui/themes";
 import IssueDetails from "./IssueDetails";
 import IssueEditButton from "./IssueEditButton";
