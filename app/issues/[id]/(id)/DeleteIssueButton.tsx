@@ -1,7 +1,6 @@
 "use client";
 import { AlertDialog, Button, Flex, Spinner } from "@radix-ui/themes";
 import axios from "axios";
-import delay from "delay";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { BsTrash } from "react-icons/bs";
@@ -13,7 +12,6 @@ const DeleteIssueButton = ({ issueId }: { issueId: number }) => {
 
   const deleteIssue = async () => {
     setIsDeleting(true);
-    await delay(1000);
     try {
       await axios.delete(`/api/issues/${issueId}`);
       router.push("../issues");

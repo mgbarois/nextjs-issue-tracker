@@ -76,6 +76,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
           defaultValue={issue?.title}
           {...register("title")}
         />
+
         <ErrorMessage>{errors.title?.message}</ErrorMessage>
         <div className="mb-3">
           <Controller
