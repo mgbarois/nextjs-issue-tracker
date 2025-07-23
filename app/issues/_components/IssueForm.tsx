@@ -50,6 +50,15 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
       } else {
         await axios.post("/api/issues", data);
         router.push("../issues");
+
+        // Router Cache (Client-side Cache) stores (in browser memory) payload of pages as
+        // user navigates in the application.
+        // Lasts for a session, or are automatically invalidated:
+        // - every 5 mins for statically-rendered routes
+        // - every 30 seconds for dynamically-rendered routes
+        // Or, force router to refresh content of current route (issues page),
+        // effectively invalidating client-side caching for this route:
+        router.refresh();
       }
     } catch {
       setIsSubmitting(false);
