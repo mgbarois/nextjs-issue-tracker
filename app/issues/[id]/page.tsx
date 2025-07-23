@@ -3,12 +3,9 @@ import { notFound } from "next/navigation";
 import React from "react";
 import IssueDetailLayout from "./IssueDetailLayout";
 import delay from "delay";
+import { PageProps } from "@/.next/types/app/page";
 
-interface Props {
-  params: { id: string };
-}
-
-const IssueDetailPage = async ({ params }: Props) => {
+const IssueDetailPage = async ({ params }: PageProps) => {
   const { id } = await params;
   const issue = await prisma.issue.findUnique({
     where: { id: parseInt(id) },
