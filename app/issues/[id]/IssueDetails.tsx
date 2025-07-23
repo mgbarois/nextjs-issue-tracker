@@ -7,7 +7,7 @@ const IssueDetails = ({ issue }: { issue?: Issue }) => {
   return (
     <>
       <Heading>{issue ? issue.title : <Skeleton />}</Heading>
-      <Flex gap="2" my="2">
+      <Flex gap="5" my="2">
         <p>
           {issue ? (
             <IssueStatusBadge status={issue.status} />
