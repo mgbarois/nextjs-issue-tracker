@@ -37,3 +37,9 @@ body {
 .prose li {
   margin-left: 1em;
 }
+
+@layer utilities {
+  .nav-link {
+    @apply opacity-50 hover:opacity-70 transition-opacity;
+  }
+}
